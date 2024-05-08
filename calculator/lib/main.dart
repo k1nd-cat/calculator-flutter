@@ -37,15 +37,23 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Color(0x44000000),
+        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title,
+            style: TextStyle(
+              color: Color.fromRGBO(200, 160, 80, 1),
+            ),
+        ),
       ),
       body: Center(
+
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: EdgeInsets.only(bottom: 8),
+            padding: EdgeInsets.only(bottom: 16),
             child: NumPadGrid(
               buttons: [
                 'C', '(', ')', '/',

@@ -54,19 +54,21 @@ class NumPadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(3),
+      padding: EdgeInsets.all(5),
       child: RawMaterialButton(
         onPressed: () => _onClick(_value),
         elevation: 0,
-        fillColor: Colors.blue,
+        fillColor: Color.fromRGBO(30, 30, 30, 1),
         child: Center(
           child: Text(_text,
             style: TextStyle(
               fontSize: 30,
+              // backgroundColor: Color.fromRGBO(200, 160, 80, 1),
+              color: Color.fromRGBO(200, 160, 80, 1),
             ),
           ),
         ),
-        padding: EdgeInsets.all(23.0),
+        padding: EdgeInsets.all(20.0),
         shape: CircleBorder(),
       ),
     );
