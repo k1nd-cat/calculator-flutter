@@ -96,7 +96,8 @@ class Result {
       case '*':
         return a * b;
       case '/':
-        return a / b;
+        if (b == 0) return null;
+        else return a / b;
       case '^':
         return pow(a, b).toDouble();
       default:

@@ -15,4 +15,11 @@ void main() {
     double answer = 3.5;
     expect(answer, result.result);
   });
+
+  test('Проверка решения уравнения', () async {
+    List<String> equation = ['3', '/', '0'];
+    var result = Result(equation);
+    String answer = "Произошла ошибка вычисления";
+    expect(answer, result.error);
+  });
 }
