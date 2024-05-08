@@ -1,6 +1,5 @@
+import 'package:calculator/view/num_pad.dart';
 import 'package:flutter/material.dart';
-
-import 'controller/result.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,33 +10,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: MaterialApp(
-                        title: 'Flutter Demo',
-                        theme: ThemeData(
-                          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                          useMaterial3: true,
-                        ),
-                        home: const MyHomePage(title: 'Flutter Demo Home Page'),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+    return MaterialApp(
+      // title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: const MyHomePage(title: 'Calculator'),
     );
   }
 }
@@ -52,13 +31,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  void nothing(String value) {}
 
   @override
   Widget build(BuildContext context) {
@@ -68,23 +42,44 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 8),
+            child: NumPadGrid(
+              buttons: [
+                'C', '(', ')', '/',
+                '1', '2', '3', '*',
+                '4', '5', '6', '-',
+                '7', '8', '9', '+',
+                '.', '0', '^', '=',
+              ],
+              onClick: (String value) {  },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+
+        // child: Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: <Widget>[
+        //     NumPadButton(
+        //       value: '9',
+        //       onClick: nothing,
+        //     ),
+        //     NumPadButton(
+        //       value: '8',
+        //       onClick: nothing,
+        //     ),
+        //     NumPadButton(
+        //       value: '7',
+        //       onClick: nothing,
+        //     ),
+        //     NumPadButton(
+        //       value: '*',
+        //       onClick: nothing,
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

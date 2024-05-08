@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:calculator/utils/values_manager.dart';
 import 'package:meta/meta.dart';
 import 'package:stack/stack.dart';
 
@@ -27,7 +28,7 @@ class Result {
   static double? solution(List<String> ppn) {
     Stack<double> values = Stack<double>();
     for (var element in ppn) {
-      if (_isNumeric(element)) {
+      if (isNumeric(element)) {
         values.push(double.parse(element));
       } else {
         double a, b;
@@ -49,14 +50,14 @@ class Result {
 
   @visibleForTesting
   static List<String>? str2Ppn(List<String> equation) {
-    if (!(_isNumeric(equation.last) || equation.last == ')')) return null;
+    if (!(isNumeric(equation.last) || equation.last == ')')) return null;
     List<String> rpl = [];
     Stack<String> operators = Stack<String>();
     int lastPriority = 0;
     int openCount = 0;
 
     for (var value in equation) {
-      if (_isNumeric(value)) {
+      if (isNumeric(value)) {
         rpl.add(value);
       } else if (value == '(') {
         openCount++;
@@ -117,19 +118,6 @@ class Result {
       return 1;
       default:
         return 0;
-    }
-  }
-
-  static bool _isNumeric(String str) {
-    if (str.isEmpty) {
-      return false;
-    }
-
-    try {
-      double.parse(str);
-      return true;
-    } catch (e) {
-      return false;
     }
   }
 }
