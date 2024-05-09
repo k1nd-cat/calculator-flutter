@@ -22,4 +22,32 @@ void main() {
     String answer = "Произошла ошибка вычисления";
     expect(answer, result.error);
   });
+
+  test('Проверка решения уравнения', () async {
+    List<String> equation = ['3', '*', '(', '1', '+', '2', ')'];
+    var result = Result(equation);
+    double answer = 9;
+    expect(answer, result.result);
+  });
+
+  // test('Проверка решения уравнения', () async {
+  //   List<String> equation = ['3', '*', '(', '1', '+', '2'];
+  //   var result = Result(equation);
+  //   double answer = 9;
+  //   expect(answer, result.result);
+  // });
+
+  test('Проверка решения уравнения', () async {
+    List<String> equation = ['3', '*', '(', '-1', '*', '1', '+', '2', ')'];
+    var result = Result(equation);
+    double answer = 3;
+    expect(answer, result.result);
+  });
+
+  test('Проверка решения уравнения', () async {
+    List<String> equation = ['3', '-', '(', '-1', '*', '1', '+', '2', ')'];
+    var result = Result(equation);
+    double answer = 2;
+    expect(answer, result.result);
+  });
 }
