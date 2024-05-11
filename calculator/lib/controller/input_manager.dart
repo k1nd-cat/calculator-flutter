@@ -3,9 +3,12 @@ import 'package:calculator/utils/values_manager.dart';
 
 class InputManager {
   List<String> _equation = [];
+  String currentNumber = '';
   String _outputEquation = '';
   String? _outputResult = '';
-  int _open = 0;
+  int _openCount = 0;
+  bool _lastIsNumeric = false;
+  int _pointCountInNumeric = 0;
 
   /**
    * nextValue code:
@@ -60,33 +63,65 @@ class InputManager {
         _digitInput(value);
     }
 
+    _outputEquation = '';
     _equation.forEach((element) => _outputEquation += element);
-    _outputResult = Result(_equation).toString();
+    _outputResult = Result(_equation).result.toString();
   }
 
   void _operationInput(String value) {
-    if (_nextValue == 0 || _nextValue == 3) {
+    if ((_lastIsNumeric && isNumeric(_equation.last)) || _equation.last == ')') {
       _equation.add(value);
-      _nextValue = 2;
+      _pointCountInNumeric = 0;
+      _lastIsNumeric = false;
     }
   }
 
   void _minusInput(String value) {
-    if (_nextValue == 0) {
+    if (_equation.isEmpty || _equation.last == '(') {
       _equation.add(value);
-      _nextValue = 1;
-    } else if (_nextValue == 3 && isNumeric(_equation.last)) {
-      _equation.add(value);
-      _nextValue = 1;
+      _lastIsNumeric = true;
+    } else {
+      _operationInput(value);
     }
   }
 
   void _pointInput() {
-    if (_equation.isNotEmpty && isNumeric(_equation.last)) {
+    if (_lastIsNumeric && _pointCountInNumeric == 0 && _equation.last[_equation.last.length - 1] != '-') {
       _equation.last += '.';
+      _pointCountInNumeric++;
     }
+  }
 
-    _nextValue = 1;
+  void _openInput() {
+    _equation.add('(');
+    _lastIsNumeric = false;
+    _pointCountInNumeric = 0;
+    _openCount++;
+  }
+
+  void _closeInput() {
+    if (_openCount > 0 && isNumeric(_equation.last)) {
+      _equation.add(')');
+      _lastIsNumeric = false;
+      _pointCountInNumeric = 0;
+      _openCount--;
+    }
+  }
+
+  void _digitInput(String value) {
+    if (_lastIsNumeric) {
+      _equation.last += value;
+    } else {
+      _equation.add(value);
+      _lastIsNumeric = true;
+    }
+  }
+
+  void _clearInput() {
+    _equation.clear();
+    _lastIsNumeric = false;
+    _openCount = 0;
+    _pointCountInNumeric = 0;
   }
 
   void _equalInput() {
@@ -100,39 +135,6 @@ class InputManager {
       } else {
         _equation.removeLast();
       }
-    }
-  }
-
-  void _clearInput() {
-    _equation.clear();
-    _nextValue = 0;
-  }
-
-  void _openInput() {
-    if (_nextValue == 0 || _nextValue == 2) {
-      _equation.add('(');
-      _open++;
-      _nextValue = 0;
-    }
-  }
-
-  void _closeInput() {
-    if (_nextValue == 2 && _open > 0) {
-      _equation.add(')');
-      _open--;
-      _nextValue = 2;
-    }
-  }
-
-  void _digitInput(String value) {
-    if (_nextValue == 0 || _nextValue == 1) {
-      if (_equation.isNotEmpty && isNumeric(_equation.last)) {
-        _equation.last += value;
-      } else {
-        _equation.add(value);
-      }
-
-      _nextValue = 3;
     }
   }
 }

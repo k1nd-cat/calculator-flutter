@@ -202,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   '7', '8', '9', '+',
                   '.', '0', '^', '=',
                 ],
-                onClick: onPressed,
+                onClick: onClick,
               ),
             ],
           ),
