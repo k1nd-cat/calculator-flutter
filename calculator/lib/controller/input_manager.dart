@@ -30,6 +30,7 @@ class InputManager {
       case '+':
       case '*':
       case '/':
+      case '^':
       //     TODO: Logic method
         break;
       case '-':

@@ -65,6 +65,20 @@ void main() {
     expect(answer, result.result);
   });
 
+  test('Проверка решения уравнения: 2(3+4)7', () async {
+    List<String> equation = ['2', '(', '3', '+', '4', ')', '7'];
+    var result = Result(equation);
+    double answer = 98;
+    expect(answer, result.result);
+  });
+
+  test('Проверка решения уравнения: 1+(1+2)(9-4)', () async {
+    List<String> equation = ['1', '+', '(', '1', '+', '2', ')', '(', '9', '-', '4', ')'];
+    var result = Result(equation);
+    double answer = 16;
+    expect(answer, result.result);
+  });
+
   // test('Проверка решения уравнения', () async {
   //   List<String> equation = [''];
   //   var result = Result(equation);

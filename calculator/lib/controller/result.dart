@@ -65,6 +65,9 @@ class Result {
         }
       } else if (currentEquation[i] == ')') {
         openCount--;
+        if (i + 1 < currentEquation.length && (isNumeric(currentEquation[i + 1]) || currentEquation[i + 1] == '(')) {
+          currentEquation.insert(i + 1, '*');
+        }
       }
 
       lastValue = currentEquation[i];
@@ -93,9 +96,9 @@ class Result {
           rpl.add(operators.pop());
         }
         operators.pop();
-        lastPriority = _getPriority(operators.top());
+        lastPriority = operators.isNotEmpty ? _getPriority(operators.top()) : 0;
       } else {
-        if (lastPriority >= _getPriority(value) && operators.top() != '(') {
+        if (lastPriority >= _getPriority(value) && operators.isNotEmpty && operators.top() != '(') {
           rpl.add(operators.pop());
         }
         operators.push(value);
