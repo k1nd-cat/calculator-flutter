@@ -1,3 +1,4 @@
+import 'package:calculator/controller/input_manager.dart';
 import 'package:calculator/utils/values_manager.dart';
 import 'package:calculator/view/num_pad.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late Result _result;
   late String _resultStr = '';
   late String _equationStr = '';
+  InputManager _inputManager = InputManager();
 
   @Deprecated("Old method")
   void onPressed(String value) {
@@ -133,7 +134,13 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void nothing(String value) {}
+  void onClick(value) {
+    _inputManager.input(value);
+    setState(() {
+      _equationStr = _inputManager.outputEquation;
+      _resultStr = _inputManager.outputResult ?? _resultStr;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
