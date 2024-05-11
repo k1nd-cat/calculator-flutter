@@ -86,10 +86,10 @@ void main() {
     expect(answer, result.result);
   });
 
-  // test('Проверка решения уравнения', () async {
-  //   List<String> equation = [''];
-  //   var result = Result(equation);
-  //   String answer = '';
-  //   expect(answer, result.error);
-  // });
+  test('Проверка решения уравнения', () async {
+    List<String> equation = [''];
+    var result = Result(equation);
+    String? answer;
+    expect(answer, result.result);
+  });
 }
