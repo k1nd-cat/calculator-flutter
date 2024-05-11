@@ -68,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
       return;
     }
 
-
     if (value == '=') {
       if (_resultStr != '') {
         setState(() {
@@ -150,57 +149,79 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Color(0x44000000),
         // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title,
-            style: TextStyle(
-              color: Color.fromRGBO(200, 160, 80, 1),
-            ),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            color: Color.fromRGBO(200, 160, 80, 1),
+          ),
         ),
       ),
       body: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
           padding: EdgeInsets.only(bottom: 20, right: 8, left: 8),
-          child:
-          Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 50),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  reverse: true,
-                  child: Text(
-                    _equationStr,
-                    style: TextStyle(
-                      fontSize: 50,
-                      color: Color.fromRGBO(200, 160, 80, 1),
+                padding: EdgeInsets.only(
+                  bottom: 50,
+                  right: 20,
+                ),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    child: Text(
+                      _equationStr,
+                      style: TextStyle(
+                        fontSize: 50,
+                        color: Color.fromRGBO(200, 160, 80, 1),
+                      ),
                     ),
                   ),
                 ),
               ),
-
               Padding(
                 padding: EdgeInsets.only(bottom: 15, right: 40),
-                child:
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(_resultStr,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    child: Text(
+                      _resultStr,
                       style: TextStyle(
                         color: Color.fromRGBO(200, 160, 80, 1),
                         fontSize: 30,
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
               NumPadGrid(
                 buttons: [
-                  'C', '(', ')', '/',
-                  '1', '2', '3', '*',
-                  '4', '5', '6', '-',
-                  '7', '8', '9', '+',
-                  '.', '0', '^', '=',
+                  'C',
+                  '(',
+                  ')',
+                  '/',
+                  '1',
+                  '2',
+                  '3',
+                  '*',
+                  '4',
+                  '5',
+                  '6',
+                  '-',
+                  '7',
+                  '8',
+                  '9',
+                  '+',
+                  '.',
+                  '0',
+                  '^',
+                  '=',
                 ],
                 onClick: onClick,
               ),

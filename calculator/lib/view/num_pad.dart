@@ -20,7 +20,7 @@ class NumPadGrid extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: RawMaterialButton(
-                onPressed: () => {},
+                onPressed: () => onClick(_value),
                 elevation: 0,
                 fillColor: Color(0x44000000),
                 child: Center(

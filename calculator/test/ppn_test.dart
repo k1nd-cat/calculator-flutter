@@ -50,4 +50,11 @@ void main() {
     List<String>? answer = ['1', '2', '+'];
     expect(answer, result);
   });
+
+  test('ОПЗ 1+2(-16+3)^2-17.3=321.7', () async {
+    List<String> equation = ['1', '+', '2', '(', '-16', '+', '3', ')', '^', '2', '-', '17.3'];
+    List<String>? result = Result.str2Ppn(equation);
+    List<String>? answer = ['1', '2', '-16', '3', '+', '2', '^', '*', '+', '17.3', '-'];
+    expect(answer, result);
+  });
 }

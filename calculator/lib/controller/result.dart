@@ -98,8 +98,12 @@ class Result {
         operators.pop();
         lastPriority = operators.isNotEmpty ? _getPriority(operators.top()) : 0;
       } else {
-        if (lastPriority >= _getPriority(value) && operators.isNotEmpty && operators.top() != '(') {
+        // if (lastPriority >= _getPriority(value) && operators.isNotEmpty && operators.top() != '(') {
+        //   rpl.add(operators.pop());
+        // }
+        while (lastPriority >= _getPriority(value) && operators.isNotEmpty && operators.top() != '(') {
           rpl.add(operators.pop());
+          lastPriority = operators.isNotEmpty ? _getPriority(operators.top()) : 0;
         }
         operators.push(value);
         lastPriority = _getPriority(value);
