@@ -39,7 +39,35 @@ class _MyHomePageState extends State<MyHomePage> {
   late String _resultStr = '';
   late String _equationStr = '';
 
+  @Deprecated("Old method")
   void onPressed(String value) {
+    if (value == '<') {
+      if (_equation.isNotEmpty) {
+        if (_equation.last.length > 1) {
+          _equation.last.substring(0, _equation.last.length - 1);
+        } else {
+          _equation.removeLast();
+        }
+
+        if (_equation.isNotEmpty) {
+          String currentEquation = '';
+          _equation.forEach((element) => currentEquation += element);
+          setState(() {
+            _equationStr = currentEquation;
+          });
+        }
+
+        _result = Result(_equation);
+        if (_result.result != null) {
+          setState(() {
+            _resultStr = _result.result.toString();
+          });
+        }
+      }
+      return;
+    }
+
+
     if (value == '=') {
       if (_resultStr != '') {
         setState(() {
@@ -95,11 +123,13 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
 
-    _result = Result(_equation);
-    if (_result.result != null) {
-      setState(() {
-        _resultStr = _result.result.toString();
-      });
+    if (value != '(') {
+      _result = Result(_equation);
+      if (_result.result != null) {
+        setState(() {
+          _resultStr = _result.result.toString();
+        });
+      }
     }
   }
 

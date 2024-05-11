@@ -29,4 +29,18 @@ void main() {
     List<String>? answer = null;
     expect(answer, result);
   });
+
+  test('Проверка составления обратной польской записи', () async {
+    List<String> equation = ['('];
+    List<String>? result = Result.str2Ppn(equation);
+    List<String>? answer = null;
+    expect(answer, result);
+  });
+
+  test('Проверка решения уравнения', () async {
+    List<String> equation = ['2', '+', '(', '3', '*', '4'];
+    List<String>? result = Result.str2Ppn(equation);
+    List<String>? answer = ['2', '3', '4', '*', '+'];
+    expect(answer, result);
+  });
 }

@@ -50,21 +50,45 @@ class Result {
 
   @visibleForTesting
   static List<String>? str2Ppn(List<String> equation) {
-    if (!(isNumeric(equation.last) || equation.last == ')')) return null;
+    List<String> currentEquation = [...equation];
     List<String> rpl = [];
     Stack<String> operators = Stack<String>();
     int lastPriority = 0;
     int openCount = 0;
 
-    for (var value in equation) {
+    String lastValue = '';
+    for (int i = 0; i < currentEquation.length; ++i) {
+      if (currentEquation[i] == '(') {
+        openCount++;
+        if (isNumeric(lastValue)) {
+          currentEquation.insert(i++, '*');
+        }
+      } else if (currentEquation[i] == ')') {
+        openCount--;
+      }
+
+      lastValue = currentEquation[i];
+    }
+
+    if (openCount < 0) {
+      return null;
+    } else {
+      for (int i = 0; i < openCount; ++i) {
+        currentEquation.add(')');
+        openCount--;
+      }
+    }
+
+    if (!(isNumeric(currentEquation.last) || currentEquation.last == ')')) return null;
+    for (var value in currentEquation) {
       if (isNumeric(value)) {
         rpl.add(value);
       } else if (value == '(') {
-        openCount++;
+        // openCount++;
         operators.push(value);
         lastPriority = _getPriority(value);
       } else if (value == ')') {
-        if (--openCount < 0) return null;
+        // if (--openCount < 0) return null;
         while(operators.top() != '(') {
           rpl.add(operators.pop());
         }
@@ -82,6 +106,8 @@ class Result {
     while(operators.isNotEmpty) {
       if (operators.top() != '(') {
         rpl.add(operators.pop());
+      } else {
+        operators.pop();
       }
     }
 
