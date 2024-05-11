@@ -15,7 +15,7 @@ class InputManager {
     '-': '-',
     '*': '×',
     '/': '⨫',
-    '^': '^'
+    '^': '^',
   };
 
   List<String> get equation => _equation;
@@ -100,7 +100,7 @@ class InputManager {
   }
 
   void _closeInput() {
-    if (_openCount < 0 || !isNumeric(_equation.last)) return;
+    if (_openCount <= 0 || (!isNumeric(_equation.last) && !(_equation.last == ')'))) return;
     _equation.add(')');
     _lastIsNumeric = false;
     _pointCountInNumeric = 0;
@@ -130,6 +130,7 @@ class InputManager {
     _equation.clear();
     _equation.add(result.toString());
     _pointCountInNumeric = _equation.last.contains('.') ? 1 : 0;
+    _openCount = 0;
   }
 
   void _backspaceInput() {

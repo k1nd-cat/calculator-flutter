@@ -45,7 +45,7 @@ class Result {
       }
     }
 
-    return values.length > 1 ? null : values.pop();
+    return values.length > 1 || values.isEmpty ? null : values.pop();
   }
 
   @visibleForTesting

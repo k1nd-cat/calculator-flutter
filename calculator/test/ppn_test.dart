@@ -19,7 +19,7 @@ void main() {
   test('Проверка составления обратной польской записи', () async {
     List<String> equation = [')'];
     List<String>? result = Result.str2Ppn(equation);
-    List<String>? answer = null;
+    List<String>? answer;
     expect(answer, result);
   });
 

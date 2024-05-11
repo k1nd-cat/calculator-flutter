@@ -92,7 +92,7 @@ class NumPadButton extends StatelessWidget {
       child: RawMaterialButton(
         onPressed: () => _onClick(_value),
         elevation: 0,
-        fillColor: Color.fromRGBO(30, 30, 30, 1),
+        fillColor: Color.fromRGBO(200, 160, 80, 0.15),
         child: Center(
           child: Text(_text,
             style: TextStyle(
