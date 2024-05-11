@@ -60,7 +60,9 @@ class InputManager {
       _equation.forEach((element) {
         _outputEquation += _outputValues[element] != null ? _outputValues[element]! : element;
       });
-      _outputResult = Result(_equation).result != null
+      int numericCount = 0;
+      _equation.forEach((element) { if (isNumeric(element)) numericCount++; });
+      _outputResult = Result(_equation).result != null && numericCount > 1
           ? Result(_equation).result.toString()
           : '';
     } else {
